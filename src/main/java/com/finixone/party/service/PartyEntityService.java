@@ -32,12 +32,12 @@ public class PartyEntityService {
                 partyIdentifierService.savePartyIdentifier(identifier);
             }
         }
-        if (partyEntity.getPartyAddresses() != null) {
-            for (com.finixone.party.model.PartyAddress address : partyEntity.getPartyAddresses()) {
-                address.setPartyId(partyEntity.getParty().getPartyId());
-                partyAddressService.savePartyAddress(address);
-            }
-        }
+        // if (partyEntity.getPartyAddresses() != null) {
+        //     for (com.finixone.party.model.PartyAddress address : partyEntity.getPartyAddresses()) {
+        //         address.setPartyId(partyEntity.getParty().getPartyId());
+        //         partyAddressService.savePartyAddress(address);
+        //     }
+        // }
         return partyEntity;
     }
 
@@ -45,7 +45,7 @@ public class PartyEntityService {
         PartyEntity partyEntity = new PartyEntity();
         partyEntity.setParty(partyService.getPartyById(partyId));
         partyEntity.setPartyIdentifiers(partyIdentifierService.getPartyIdentifiersByPartyId(partyId));
-        partyEntity.setPartyAddresses(partyAddressService.getPartyAddressesByPartyId(partyId));
+        //partyEntity.setPartyAddresses(partyAddressService.getPartyAddressesByPartyId(partyId));
         return partyEntity;
     }
 
@@ -60,11 +60,11 @@ public class PartyEntityService {
                 partyIdentifierService.updatePartyIdentifier(identifier);
             }
         }
-        if (partyEntity.getPartyAddresses() != null) {
-            for (com.finixone.party.model.PartyAddress address : partyEntity.getPartyAddresses()) {
-                partyAddressService.updatePartyAddress(address);
-            }
-        }
+        // if (partyEntity.getPartyAddresses() != null) {
+        //     for (com.finixone.party.model.PartyAddress address : partyEntity.getPartyAddresses()) {
+        //         partyAddressService.updatePartyAddress(address);
+        //     }
+        // }
         return partyEntity;
     }
     

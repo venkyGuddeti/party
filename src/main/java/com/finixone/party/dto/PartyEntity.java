@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PartyEntity {
 
     Party party;
-    java.util.List<com.finixone.party.model.PartyAddress> partyAddresses;
+    //java.util.List<com.finixone.party.model.PartyAddress> partyAddresses;
     java.util.List<com.finixone.party.model.PartyIdentifier> partyIdentifiers;
 
 }

@@ -40,7 +40,17 @@ public class Party {
     private String partyType;
     @Column(name = "party_status", length = 10, nullable = false)
     private String partyStatus;
-    @Column(name="country", length = 5)
+    @Column(name = "address_line1", length = 255, nullable = false)
+    private String addressLine1;
+    @Column(name = "address_line2", length = 255)
+    private String addressLine2;
+    @Column(name = "city", length = 100, nullable = false)
+    private String city;
+    @Column(name = "state", length = 100)
+    private String state;
+    @Column(name = "postal_code", length = 20, nullable = false)
+    private String postalCode;
+    @Column(name = "country", length = 5, nullable = false)
     private String country;
     @Column(name="currency", length = 5)
     private String currency;
