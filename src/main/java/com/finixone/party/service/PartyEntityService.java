@@ -56,8 +56,12 @@ public class PartyEntityService {
         }
         if (partyEntity.getPartyIdentifiers() != null) {
             for (com.finixone.party.model.PartyIdentifier identifier : partyEntity.getPartyIdentifiers()) {
-                identifier.setPartyId(null);
-                partyIdentifierService.updatePartyIdentifier(identifier);
+                identifier.setPartyId(partyEntity.getParty().getPartyId());
+                if (identifier.getPartyIdentifierId() != null) {
+                    partyIdentifierService.updatePartyIdentifier(identifier);
+                }else{
+                    partyIdentifierService.savePartyIdentifier(identifier);
+                }
             }
         }
         // if (partyEntity.getPartyAddresses() != null) {

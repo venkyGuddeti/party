@@ -14,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "account_price_profile", schema = "fnx_party",
-       uniqueConstraints = @UniqueConstraint(
-           name = "account_price_profile_ukey",
-           columnNames = {"price_list_id", "start_date", "acount_pl_status"}
-       ))
+@Table(name = "account_price_profile", schema = "fnx_party")
 public class AccountPriceProfile {
     
      @Id

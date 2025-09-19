@@ -23,8 +23,8 @@ public class AccountDto {
     private String accountStatus;
     private String accountName;
     private String currency;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Boolean taxExempted;
     private Boolean allowMultiCurrency;
     private String companyCode;

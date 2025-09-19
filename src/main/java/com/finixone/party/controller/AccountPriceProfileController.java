@@ -33,7 +33,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/account-price-profiles")
+@RequestMapping("/api/account-price-profiles")
 @CrossOrigin(origins = "*")
 public class AccountPriceProfileController {
     

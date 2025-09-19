@@ -53,12 +53,10 @@ public class Account {
     private String currency;
 
     @Column(name = "start_date", nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name = "tax_exempted", nullable = false)
     private Boolean taxExempted = false;

@@ -25,15 +25,15 @@ public interface PartyMapper {
     @Mapping(target = "country", source = "accountPartyDto.country")
     @Mapping(target = "currency", source = "accountDto.currency")
     @Mapping(target = "userResponsible", source = "accountDto.userResponsible")
-    @Mapping(target = "startDate", source = "accountDto.startDate", qualifiedByName = "dateTimeToDate")
+    @Mapping(target = "startDate", source = "accountDto.startDate") //, qualifiedByName = "dateTimeToDate"
     @Mapping(target = "partyId", ignore = true)
     @Mapping(target = "alternativeId", ignore = true)
     Party createParty(AccountDto accountDto, AccountPartyDto accountPartyDto);
  
 
-    @Named("dateTimeToDate")
-    default LocalDate dateTimeToDate(LocalDateTime dateTime) {
-        return dateTime != null ? dateTime.toLocalDate() : null;
-    }
+    // @Named("dateTimeToDate")
+    // default LocalDate dateTimeToDate(LocalDateTime dateTime) {
+    //     return dateTime != null ? dateTime.toLocalDate() : null;
+    // }
         
     }

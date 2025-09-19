@@ -1,5 +1,6 @@
 package com.finixone.party.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -152,7 +153,7 @@ public class AccountService {
      */
     @Transactional(readOnly = true)
     public List<Account> getActiveAccounts() {
-        return accountRepository.findActiveAccounts(LocalDateTime.now());
+        return accountRepository.findActiveAccounts(LocalDate.now());
     }
     
     /**
@@ -160,7 +161,7 @@ public class AccountService {
      */
     @Transactional(readOnly = true)
     public List<Account> getExpiredAccounts() {
-        return accountRepository.findExpiredAccounts(LocalDateTime.now());
+        return accountRepository.findExpiredAccounts(LocalDate.now());
     }
     
     /**
@@ -195,7 +196,7 @@ public class AccountService {
      */
     public Account softDeleteAccount(UUID accountId) {
         Account account = getAccountById(accountId);
-        account.setEndDate(LocalDateTime.now());
+        account.setEndDate(LocalDate.now());
         account.setUpdatedAt(LocalDateTime.now());
         return accountRepository.save(account);
     }

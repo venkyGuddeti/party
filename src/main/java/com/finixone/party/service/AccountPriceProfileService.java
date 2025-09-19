@@ -30,7 +30,7 @@ public class AccountPriceProfileService {
      * Create a new account price profile
      */
     public AccountPriceProfile create(AccountPriceProfile profile) {
-        validateUniqueConstraint(profile);
+       // validateUniqueConstraint(profile);
         profile.setCreatedAt(LocalDateTime.now());
         profile.setUpdatedAt(LocalDateTime.now());
         return repository.save(profile);

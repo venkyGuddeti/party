@@ -11,7 +11,7 @@ public class GenericUtils {
     }   
 
     public static boolean isCreateOperation(String operation) {
-        return "create".equalsIgnoreCase(operation);
+        return  "create".equalsIgnoreCase(GenericUtils.isNullOrEmpty(operation)?"create":operation);
     }
 
     public static boolean isUpdateOperation(String operation) {

@@ -19,6 +19,7 @@ import com.finixone.party.model.AccountContact;
 import com.finixone.party.model.AccountPriceProfile;
 import com.finixone.party.utils.GenericUtils;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,6 +35,7 @@ public class AccountEntityService {
     @Autowired
     private final AccountPriceProfileService accountPriceProfileService;
 
+    @Transactional
     public AccountEntity saveAccountEntity(com.finixone.party.dto.AccountEntity accountEntity) {
 
         AccountDto accountDto = accountEntity.getAccount();
@@ -43,13 +45,39 @@ public class AccountEntityService {
             accountDto = AccountMapper.INSTANCE.toDto(account);
             accountEntity.setAccount(accountDto);
 
+            List<AccountContactDto> contactDtos = accountEntity.getAccountContacts();
+            if (contactDtos != null && !contactDtos.isEmpty()) {
+                for (AccountContactDto contactDto : contactDtos) {
+                    contactDto.setAccountId(account.getAccountId());
+                    AccountContact accountContact = AccountContactMapper.INSTANCE.toEntity(contactDto);
+                    if(accountContact.getContactId() == null) {
+                        accountContact.setAccountId(account.getAccountId());
+                        accountContactService.createContact(accountContact);
+                    }else{
+                        accountContactService.updateContact(accountContact.getContactId(), accountContact);
+                    }
+                }
+            }
+
             List<AccountPriceProfileDto> profileDtos = accountEntity.getPriceProfiles();
-            for (AccountPriceProfileDto profileDto : profileDtos) {
-                AccountPriceProfile accountPriceProfile = AccountPriceProfileMapper.INSTANCE.toEntity(profileDto);
-                accountPriceProfile.setAccountId(account.getAccountId());
-                accountPriceProfileService.create(accountPriceProfile);
-                profileDto = AccountPriceProfileMapper.INSTANCE.toDto(accountPriceProfile);
-                accountEntity.getPriceProfiles().add(profileDto);
+            if (profileDtos != null && !profileDtos.isEmpty()) {
+                // iterate a copy and collect created profiles into a new list to avoid
+                // ConcurrentModificationException when modifying the original list while iterating
+                List<AccountPriceProfileDto> newProfiles = new ArrayList<>();
+                for (AccountPriceProfileDto profileDto : new ArrayList<>(profileDtos)) {
+                    profileDto.setAccountId(account.getAccountId());
+                    AccountPriceProfile accountPriceProfile = AccountPriceProfileMapper.INSTANCE.toEntity(profileDto);
+                    if(accountPriceProfile.getAccountPriceProfileId() == null) {
+                        accountPriceProfile.setAccountId(account.getAccountId());
+                        accountPriceProfileService.create(accountPriceProfile);
+                    }else{
+                        accountPriceProfileService.update(accountPriceProfile.getAccountPriceProfileId(), accountPriceProfile);
+                    }
+                    AccountPriceProfileDto profileDtoNew = AccountPriceProfileMapper.INSTANCE.toDto(accountPriceProfile);
+                    newProfiles.add(profileDtoNew);
+                }
+                // replace the original list with the list of created profiles (or use addAll to append)
+                accountEntity.setPriceProfiles(newProfiles);
             }
         }
         return accountEntity;

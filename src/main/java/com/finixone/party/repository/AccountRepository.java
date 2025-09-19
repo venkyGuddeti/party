@@ -1,6 +1,7 @@
 package com.finixone.party.repository;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -45,11 +46,11 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
     
     // Find active accounts (no end date or end date in future)
     @Query("SELECT a FROM Account a WHERE a.endDate IS NULL OR a.endDate > :currentDate")
-    List<Account> findActiveAccounts(@Param("currentDate") LocalDateTime currentDate);
+    List<Account> findActiveAccounts(@Param("currentDate") LocalDate currentDate);
     
     // Find expired accounts
     @Query("SELECT a FROM Account a WHERE a.endDate IS NOT NULL AND a.endDate <= :currentDate")
-    List<Account> findExpiredAccounts(@Param("currentDate") LocalDateTime currentDate);
+    List<Account> findExpiredAccounts(@Param("currentDate") LocalDate currentDate);
     
 
     
