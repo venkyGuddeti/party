@@ -228,4 +228,18 @@ public class AccountPriceProfileController {
         boolean exists = service.existsById(id);
         return ResponseEntity.ok(exists);
     }
+
+    @GetMapping("/account-number")
+    public ResponseEntity<List<AccountPriceProfile>> getByAccountNumber(    
+            @RequestParam String accountIdType,
+            @RequestParam String accountNumber) {
+        try {
+            List<AccountPriceProfile> profiles = service.findByAccountNumber(accountIdType, accountNumber);
+            return new ResponseEntity<>(profiles, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }   
+
+
 }

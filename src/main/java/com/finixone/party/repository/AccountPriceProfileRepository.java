@@ -85,4 +85,11 @@ public interface AccountPriceProfileRepository extends JpaRepository<AccountPric
            "AND (app.endDate IS NULL OR app.endDate >= :currentDate)")
     long countActiveProfilesByAccountId(@Param("accountId") UUID accountId, 
                                        @Param("currentDate") LocalDateTime currentDate);
+
+       /**
+        * Find Price Profiles by Account Number
+        */
+       @Query("SELECT app FROM AccountPriceProfile app  JOIN Account a ON app.accountId = a.id WHERE a.accountNumber = :accountNumber and a.accountIdType = :accountIdType order by app.prioritySequence")
+       List<AccountPriceProfile> findByAccountNumber(@Param("accountIdType") String accountIdType, @Param("accountNumber") String accountNumber);  
+
 }

@@ -188,4 +188,8 @@ public class AccountPriceProfileService {
                 "Account price profile already exists with the same price list ID, start date, and status");
         }
     }
+
+    public List<AccountPriceProfile> findByAccountNumber(String accountIdType, String accountNumber) {
+        return repository.findByAccountNumber( accountIdType, accountNumber);
+    }
 }
