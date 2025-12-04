@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finixone.party.context.RequestContext;
 import com.finixone.party.dto.AccountEntity;
 import com.finixone.party.service.AccountEntityService;
 
@@ -32,21 +33,29 @@ public class AccountEntityController {
 
     @GetMapping("/{accountId}")
     public AccountEntity getAccountEntityById(@PathVariable UUID accountId) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Getting account entity for User ID: " + userId);
         return accountEntityService.getAccountEntityById(accountId);
     }
 
     @PostMapping
     public AccountEntity createAccountEntity(@RequestBody AccountEntity accountEntity) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Creating account entity for User ID: " + userId);
         return accountEntityService.saveAccountEntity(accountEntity);
     }
 
     @GetMapping("/party/{partyId}")
     public List<AccountEntity> getAccountEntitiesByPartyId(@PathVariable UUID partyId) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Getting account entities by party ID for User ID: " + userId);
         return accountEntityService.getAccountEntityByPartyId(partyId);
     }
 
     @PutMapping("/{accountId}")
     public AccountEntity updateAccountEntity(@PathVariable UUID accountId, @RequestBody AccountEntity accountEntity) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Updating account entity for User ID: " + userId);
         return accountEntityService.saveAccountEntity(accountEntity);
     }
 

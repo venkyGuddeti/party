@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finixone.party.context.RequestContext;
 import com.finixone.party.model.Party;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -35,31 +36,44 @@ public class PartyController {
 
     @PostMapping
     public Party saveParty(@RequestBody Party party) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Creating party for User ID: " + userId);
         return partyService.saveParty(party);
     }
+    
     @PutMapping("/{id}")
     public Party updateParty(@PathVariable("id") UUID partyId, @RequestBody Party party) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Updating party for User ID: " + userId);
         party.setPartyId(partyId);
         return partyService.updateParty(party);
     }
 
     @GetMapping("/{id}")
     public Party getPartyById(@PathVariable("id") UUID partyId) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Getting party for User ID: " + userId);
         return partyService.getPartyById(partyId);
     }
 
     @DeleteMapping("/{id}")
     public void deleteParty(@PathVariable("id") UUID partyId) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Deleting party for User ID: " + userId);
         partyService.deleteParty(partyId);
     }
 
     @GetMapping
     public java.util.List<Party> getAllParties() {
+        String userId = RequestContext.getUserId();
+        System.out.println("Getting all parties for User ID: " + userId);
         return partyService.getAllParties();
     }
 
     @GetMapping("/by-name/{partyName}")
     public java.util.List<Party> getPartiesByPartyName(@PathVariable("partyName") String partyName) {
+        String userId = RequestContext.getUserId();
+        System.out.println("Getting parties by name for User ID: " + userId);
         return partyService.getPartiesByPartyName(partyName);
     }
  
@@ -75,7 +89,9 @@ public class PartyController {
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "50") int size
     ) {
-
+        String userId = RequestContext.getUserId();
+        System.out.println("Searching parties for User ID: " + userId);
+        
         Pageable pageable = PageRequest.of(page, size);
         Page<Party> result = partyService.searchParties(
                 partyName,

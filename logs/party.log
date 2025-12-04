@@ -1,0 +1,5 @@
+2025-12-04T00:29:56.924-07:00  INFO 22060 --- [party] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-04T00:29:56.968-07:00  INFO 22060 --- [party] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-04T00:29:56.977-07:00  INFO 22060 --- [party] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-04T00:29:56.989-07:00  INFO 22060 --- [party] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-04T00:29:57.012-07:00  INFO 22060 --- [party] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

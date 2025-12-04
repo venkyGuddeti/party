@@ -3,6 +3,7 @@ package com.finixone.party.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.finixone.party.context.RequestContext;
 import com.finixone.party.model.Party;
 
 import lombok.RequiredArgsConstructor;
@@ -35,10 +36,28 @@ public class PartyService {
     }
 
     public Party saveParty(Party party) {
+        String userId = RequestContext.getUserId();
+        String requestId = RequestContext.getRequestId();
+        
+        // You can use userId for audit logging, data filtering, etc.
+        System.out.println("Service - Creating party for User: " + userId + ", Request: " + requestId);
+        
+        // Example: Set audit fields if they exist in your Party entity
+        // party.setCreatedBy(userId);
+        // party.setRequestId(requestId);
+        
         return partyRepository.save(party);
     }
 
     public Party updateParty(Party party) {
+        String userId = RequestContext.getUserId();
+        String requestId = RequestContext.getRequestId();
+        
+        System.out.println("Service - Updating party for User: " + userId + ", Request: " + requestId);
+        
+        // Example: Set audit fields if they exist in your Party entity
+        // party.setUpdatedBy(userId);
+        
         return partyRepository.save(party);
     }   
 
